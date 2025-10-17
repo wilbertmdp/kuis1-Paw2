@@ -66,6 +66,41 @@ export const listMahasiswaId = async (req, res) => {
     }
 }
 
+export const searchMahasiswaByNama = async (req, res) => {
+    try {
+        const nama = req.params.nama
+        if (!nama) {
+            return res.status(400).json({
+                message: "Nama tidak boleh kosong",
+                data: null
+            })
+        }
+
+        const data = await mahasiswaModel.find({
+            nama: { $regex: nama, $options: "i" }
+        })
+
+        if (data.length === 0) {
+            return res.status(404).json({
+                message: `Mahasiswa dengan nama '${nama}' tidak ditemukan`,
+                data: []
+            })
+        }
+
+        res.status(200).json({
+            message: "Hasil pencarian mahasiswa",
+            data: data
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+            data: null
+        })
+    }
+}
+
+
 export const updateMahasiswa = async (req, res) => {
     try{
         const id = req.params?.id

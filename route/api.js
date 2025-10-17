@@ -11,6 +11,7 @@ api.delete("/message/:id", messageController.deleteMessage)
 
 api.get("/mahasiswa", mahasiswaController.listMahasiswa)
 api.get("/mahasiswa/:id", mahasiswaController.listMahasiswaId)
+api.get("/mahasiswa/nama/:nama", mahasiswaController.searchMahasiswaByNama)
 api.post("/mahasiswa",mahasiswaController.createMahasiswa)
 api.put("/mahasiswa/:id", mahasiswaController.updateMahasiswa)
 api.delete("/mahasiswa/:id", mahasiswaController.deleteMessage)
